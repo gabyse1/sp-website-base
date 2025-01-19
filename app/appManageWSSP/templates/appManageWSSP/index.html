@@ -1,0 +1,18 @@
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy to Vercel</title>
+    {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'appManageWSSP/css/styles-manage.scss' %}" />
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'appManageWSSP/css/inicio.scss' %}" />
+    {% endcompress %}
+</head>
+<body>
+    <h1>Deploy Django in Vercel</h1>
+    <p>This is a test app to understand, how to deploy a django app to vercel</p>
+</body>
+</html>
