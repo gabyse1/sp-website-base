@@ -2912,7 +2912,7 @@ def add_contact_js(request):
                 msg = header + """\
                 Mensaje recibido desde el sitio web de Sierra Productiva.
                 Se sugiere dar respuesta a este contacto cuyo email se encuentra listado lineas abajo.\n
-                    Name:  {}
+                    Nombre: {}
                     Email: {}
                     Móvil: {}
                     País:  {}
