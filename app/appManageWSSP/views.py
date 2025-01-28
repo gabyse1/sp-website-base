@@ -1028,8 +1028,8 @@ def add_sliderElement(request, id_slider):
                     element.id = SliderElement.objects.latest('id').id + 1
                     element.slider = slider
                     element.user = request.user
-                    element.save()
                     element.medias.clear()
+                    element.save()
                     multiselect = form.cleaned_data.get("medias")
                     for ms in multiselect:
                         element.medias.add(ms.id)
@@ -1080,12 +1080,12 @@ def adm_sliderElement(request, adm, id):
                     # create sliderElement record in database
                     element = form.save(commit=False)
                     element.user = request.user
-                    element.save()
                     element.medias.clear()
+                    element.save()
                     multiselect = form.cleaned_data.get("medias")
                     if multiselect:
                         for ms in multiselect:
-                            element.medias.add(ms)
+                            element.medias.add(ms.id)
 
                     # load record
                     return HttpResponseRedirect(reverse("adm_sliderElement", kwargs={"adm":"edit","id":element.id}))
