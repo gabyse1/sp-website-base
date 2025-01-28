@@ -1028,9 +1028,9 @@ def add_sliderElement(request, id_slider):
                     element.id = SliderElement.objects.latest('id').id + 1
                     element.slider = slider
                     element.user = request.user
-                    element.medias.clear()
                     element.save()
                     multiselect = form.cleaned_data.get("medias")
+                    element.medias.clear()
                     for ms in multiselect:
                         element.medias.add(ms.id)
                     # load record
@@ -1080,9 +1080,9 @@ def adm_sliderElement(request, adm, id):
                     # create sliderElement record in database
                     element = form.save(commit=False)
                     element.user = request.user
-                    element.medias.clear()
                     element.save()
                     multiselect = form.cleaned_data.get("medias")
+                    element.medias.clear()
                     if multiselect:
                         for ms in multiselect:
                             element.medias.add(ms.id)
