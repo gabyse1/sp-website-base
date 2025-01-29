@@ -1029,8 +1029,8 @@ def add_sliderElement(request, id_slider):
                     element.slider = slider
                     element.user = request.user
                     element.save()
-                    element.medias.clear()
                     multiselect = form.cleaned_data.get("medias")
+                    element.medias.clear()
                     for ms in multiselect:
                         element.medias.add(ms.id)
                     # load record
@@ -1081,11 +1081,11 @@ def adm_sliderElement(request, adm, id):
                     element = form.save(commit=False)
                     element.user = request.user
                     element.save()
-                    element.medias.clear()
                     multiselect = form.cleaned_data.get("medias")
+                    element.medias.clear()
                     if multiselect:
                         for ms in multiselect:
-                            element.medias.add(ms)
+                            element.medias.add(ms.id)
 
                     # load record
                     return HttpResponseRedirect(reverse("adm_sliderElement", kwargs={"adm":"edit","id":element.id}))
@@ -2912,7 +2912,7 @@ def add_contact_js(request):
                 msg = header + """\
                 Mensaje recibido desde el sitio web de Sierra Productiva.
                 Se sugiere dar respuesta a este contacto cuyo email se encuentra listado lineas abajo.\n
-                    Name:  {}
+                    Nombre: {}
                     Email: {}
                     Móvil: {}
                     País:  {}

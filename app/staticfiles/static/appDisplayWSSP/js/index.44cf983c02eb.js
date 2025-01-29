@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function(){
     let videoFullScreen = false;
 
     // INICIALIZACION DE FUNCIONES EN LA PRIMERA CARGA DE PÁGINA WEB
+	console.log('OUTER WIDTH: ', window.outerWidth);
+	console.log('OUTER HEIGHT: ', window.outerHeight);
+	console.log('INNER WIDTH: ', window.innerWidth);
+	console.log('INNER HEIGHT: ', window.innerHeight);
 	func_aplicarAjustesEnElementos();
     func_actualizarNavegadorSecciones(1,1);
     func_inicializarSlidersInteractivosN1();
