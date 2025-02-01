@@ -36,10 +36,6 @@ document.addEventListener('DOMContentLoaded', function(){
     let videoFullScreen = false;
 
     // INICIALIZACION DE FUNCIONES EN LA PRIMERA CARGA DE PÁGINA WEB
-	console.log('OUTER WIDTH: ', window.outerWidth);
-	console.log('OUTER HEIGHT: ', window.outerHeight);
-	console.log('INNER WIDTH: ', window.innerWidth);
-	console.log('INNER HEIGHT: ', window.innerHeight);
 	func_aplicarAjustesEnElementos();
     func_actualizarNavegadorSecciones(1,1);
     func_inicializarSlidersInteractivosN1();
@@ -1261,16 +1257,15 @@ function func_microbasinMap() {
 	eventComunityCircles.forEach(function(eventComunityCircle){
 		eventComunityCircle.addEventListener("mouseenter", function(){
 			if(window.outerWidth > 1024){
-				// Variables
-				var selectPoint = eventComunityCircle.getBoundingClientRect();
-				var MCJMPoint = document.querySelector("#mapa_microcuenca_jabonmayo").getBoundingClientRect();
 				// Asignar estilo a comunidad seleccionada
 				nombreComunidad = eventComunityCircle.getAttribute("id");
 				nombreComunidad = nombreComunidad.substr(8, nombreComunidad.length - 1);
 				selectVillage(nombreComunidad);
 				// Calcular posición para mapa comunidad
+				var selectPoint = eventComunityCircle.getBoundingClientRect();
+				var MCJMPoint = document.querySelector("#mapa_microcuenca_jabonmayo").getBoundingClientRect();
 				x_mapa_comunidad = selectPoint.right - MCJMPoint.left;
-				y_mapa_comunidad = selectPoint.top - MCJMPoint.top;
+				y_mapa_comunidad = selectPoint.top - MCJMPoint.top
 				
 				// Mostrar mapa comunidad
 				document.querySelector("#mapa_microcuenca_comunidad_container").style.top = y_mapa_comunidad+"px";
@@ -1290,16 +1285,14 @@ function func_microbasinMap() {
 			if(window.outerWidth < 1025){
 				// Restore map
 				restoreMap();
-				// Variables
-				var selectPoint = eventComunityCircle.getBoundingClientRect();
-				var MCJMPoint = document.querySelector("#mapa_microcuenca_jabonmayo").getBoundingClientRect();
 				// Asignar estilo a comunidad seleccionada
 				nombreComunidad = eventComunityCircle.getAttribute("id");
 				nombreComunidad = nombreComunidad.substr(8, nombreComunidad.length - 1);
 				selectVillage(nombreComunidad);
 				// Calcular posición para mapa comunidad
-				x_mapa_comunidad = selectPoint.right - MCJMPoint.left;
-				y_mapa_comunidad = selectPoint.top - MCJMPoint.top;
+				var selectPoint = eventComunityCircle.getBoundingClientRect();
+				x_mapa_comunidad = selectPoint.right;
+				y_mapa_comunidad = selectPoint.top;
 				
 				// Mostrar mapa comunidad
 				document.querySelector("#mapa_microcuenca_comunidad_container").style.top = y_mapa_comunidad+"px";
@@ -1400,8 +1393,8 @@ function func_scopeMap() {
 				// set position to selected region information
 				var point = eventRegionName.getBoundingClientRect();
 				let mapa_alcance_territorial = document.querySelector('#mapa_alcance_territorial').getBoundingClientRect();
-				x = point.left - mapa_alcance_territorial.left;
-				y = point.top - mapa_alcance_territorial.top - 20;
+				x = point.left
+				y = point.top - 20;
 				// limpiar información de región
 				restoreMap();
 				// crear información
