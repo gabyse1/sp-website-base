@@ -718,20 +718,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 
 		// cargar paises a selector de formulario
-		if(document.querySelector("#id_country")){
-			fetch('/retrieve/countries')
-			.then(response => response.json())
-			.then(result => {
-				let optList = `<option value="">Select</option>`;
-                result.forEach(function(element){
-                    optList += `<option value="` + element["id"] + `">` + element["name_es"] + `</option>`;
-                });
-                document.querySelector('#id_country').innerHTML = optList;
-			})
-			.catch(error => {
-				console.error(error);
-			});
-		}
+		// if(document.querySelector("#id_country")){
+		// 	fetch('/retrieve/countries')
+		// 	.then(response => response.json())
+		// 	.then(result => {
+		// 		let optList = `<option value="">Select</option>`;
+        //         result.forEach(function(element){
+        //             optList += `<option value="` + element["id"] + `">` + element["name_es"] + `</option>`;
+        //         });
+        //         document.querySelector('#id_country').innerHTML = optList;
+		// 	})
+		// 	.catch(error => {
+		// 		console.error(error);
+		// 	});
+		// }
 
 		// inicializar eventos para mostrar el menu de slider
 		let sectionSliderMenus = document.querySelectorAll(".slider-menu-icon");
@@ -1145,7 +1145,7 @@ function func_contactForm() {
 			console.error(result["error"]);
 		  }
 		  else{
-			let optList = `<option value="">Seleccionar</option>`;
+			let optList = `<option value="1">PERÚ</option>`;
 			result.forEach(function(element){
 				optList += `<option value="` + element["id"] + `">` + element["name_es"] + `</option>`;
 			});
@@ -1165,7 +1165,7 @@ function func_contactForm() {
 			console.error(result["error"]);
 		  }
 		  else{
-			let optList = `<option value="">Select</option>`;
+			let optList = `<option value="1">PERU</option>`;
 			result.forEach(function(element){
 			  optList += `<option value="` + element["id"] + `">` + element["name_en"] + `</option>`;
 			});
@@ -1235,7 +1235,7 @@ function func_contactForm() {
 				  field.value = ""
 			  });
 
-			  formElement.querySelector('#id_country [value=""]').selected = true;
+			  formElement.querySelector('#id_country [value="1"]').selected = true;
 			}
 			setTimeout(() => {
 			  formMsg.innerHTML = "";
@@ -1393,8 +1393,8 @@ function func_scopeMap() {
 				// set position to selected region information
 				var point = eventRegionName.getBoundingClientRect();
 				let mapa_alcance_territorial = document.querySelector('#mapa_alcance_territorial').getBoundingClientRect();
-				x = point.left - mapa_alcance_territorial.left;
-				y = point.top - mapa_alcance_territorial.top - 20;
+				x = point.left
+				y = point.top - 20;
 				// limpiar información de región
 				restoreMap();
 				// crear información
