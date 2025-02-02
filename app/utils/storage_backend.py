@@ -16,6 +16,7 @@ class SupabaseStorage(Storage):
         try:
             content_bytes = content.read()
             self.bucket.upload(name, content_bytes, {'content-type':content.content_type, "x-upsert": 'true'})
+            return name
         except Exception as e:
             print(f'Error uploading file to Supabase: {e}')
             

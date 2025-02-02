@@ -94,7 +94,7 @@ form .submit-box input {
     cursor: pointer;
     color: rgba(16,220,178,1) !important;
     font-family: inherit;
-    font-size: 0.75em;
+    font-size: 0.875rem;
     letter-spacing: 0.05em;
     border: none;
     border: 1px solid rgba(16,220,178,0.5);

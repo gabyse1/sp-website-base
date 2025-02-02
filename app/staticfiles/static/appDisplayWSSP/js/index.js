@@ -717,22 +717,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			sectionNavNumber.innerHTML = padLeft(number, 2);
 		});
 
-		// cargar paises a selector de formulario
-		// if(document.querySelector("#id_country")){
-		// 	fetch('/retrieve/countries')
-		// 	.then(response => response.json())
-		// 	.then(result => {
-		// 		let optList = `<option value="">Select</option>`;
-        //         result.forEach(function(element){
-        //             optList += `<option value="` + element["id"] + `">` + element["name_es"] + `</option>`;
-        //         });
-        //         document.querySelector('#id_country').innerHTML = optList;
-		// 	})
-		// 	.catch(error => {
-		// 		console.error(error);
-		// 	});
-		// }
-
 		// inicializar eventos para mostrar el menu de slider
 		let sectionSliderMenus = document.querySelectorAll(".slider-menu-icon");
 		if(sectionSliderMenus){
@@ -1147,7 +1131,11 @@ function func_contactForm() {
 		  else{
 			let optList = `<option value="1">PERÚ</option>`;
 			result.forEach(function(element){
-				optList += `<option value="` + element["id"] + `">` + element["name_es"] + `</option>`;
+				if(element['id'] == 1) {
+					optList += `<option value="` + element["id"] + `" selected >` + element["name_es"] + `</option>`;
+				} else {
+					optList += `<option value="` + element["id"] + `">` + element["name_es"] + `</option>`;
+				}
 			});
 			document.querySelector('form.lang-es #id_country').innerHTML = optList;
 		  }
@@ -1167,7 +1155,11 @@ function func_contactForm() {
 		  else{
 			let optList = `<option value="1">PERU</option>`;
 			result.forEach(function(element){
-			  optList += `<option value="` + element["id"] + `">` + element["name_en"] + `</option>`;
+				if(element['id'] == 1) {
+					optList += `<option value="` + element["id"] + `" selected>` + element["name_en"] + `</option>`;		
+				} else {
+			  		optList += `<option value="` + element["id"] + `">` + element["name_en"] + `</option>`;
+				}
 			});
 			document.querySelector('form.lang-en #id_country').innerHTML = optList;
 		  }

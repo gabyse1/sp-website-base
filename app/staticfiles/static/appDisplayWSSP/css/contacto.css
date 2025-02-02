@@ -33,6 +33,7 @@ position: relative;
 .form-item label {
     text-transform: uppercase;
     color: rgba(16, 220, 178, 1);
+    font-size: 0.6em;
     font-weight: 300;
 }
 
@@ -93,7 +94,7 @@ form .submit-box input {
     cursor: pointer;
     color: rgba(16,220,178,1) !important;
     font-family: inherit;
-    font-size: 0.875rem;
+    font-size: 0.75em;
     letter-spacing: 0.05em;
     border: none;
     border: 1px solid rgba(16,220,178,0.5);
