@@ -1,0 +1,154 @@
+/* ----- POSICIONAR ELEMENTOS DE DESCRIPCION ----- */
+form {
+    width: 100%;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+}
+
+form fieldset {
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+form fieldset .form-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+position: relative;
+}
+
+.form-item label {
+    text-transform: uppercase;
+    color: rgba(16, 220, 178, 1);
+    font-size: 0.6em;
+    font-weight: 300;
+}
+
+.form-item input,
+.form-item select,
+.form-item textarea {
+    width: 100%;
+    border: none;
+    border: 1px solid rgba(16, 220, 178, 0.75);
+    background: transparent;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+}
+
+.form-item input:focus,
+.form-item select:focus,
+.form-item textarea:focus {
+    outline: none;
+    border: 1px solid rgba(16,220,178,1);
+    font-family: inherit;
+}
+
+.form-item select {
+    width: 100%;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.form-item select option {
+    background-color: #001d11;
+    font-family: inherit;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+}
+
+.form-item textarea {
+    min-height: 80px;
+    max-height: 80px;
+}
+
+form .submit-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+form .submit-box input {
+    width: 50%;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    color: rgba(16,220,178,1) !important;
+    font-family: inherit;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border: none;
+    border: 1px solid rgba(16,220,178,0.5);
+    background: transparent;
+}
+
+form .submit-box input:hover {
+  background: rgba(16, 220, 178, 0.3);
+}
+
+form .form-message {
+    width: 100%;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+}
+
+form .errorlist {
+    color: #e99002;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+form .error-gral {
+    position: relative;
+    top: 0;
+}
+
+@media only screen and (min-width: 1024px) {
+
+    #seccion_1 {
+        .seccion_elemento_descripcion_articulo {
+            left: 10%;
+            bottom: 15%;
+        }
+
+        .seccion_elemento_descripcion_htmlarticle {
+            left: 60%;
+            bottom: 10%;
+        }
+    }
+}

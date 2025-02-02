@@ -10,6 +10,7 @@
         {% compress css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static 'appManageWSSP/css/styles-manage.scss' %}" />
         {% endcompress %}
+        <link rel="stylesheet" type="text/css" href="{% static 'ckeditor/ckeditor.css' %}" />
     </head>
     <body>
         {% if user.is_authenticated %}
@@ -173,6 +174,9 @@
             {% endblock %}
         {% endif %}
     </body>
+    <script>
+        var CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';
+    </script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
     <script src="{% static 'appManageWSSP/js/index-manage.js' %}"></script>
