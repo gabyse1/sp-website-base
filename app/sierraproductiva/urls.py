@@ -25,3 +25,6 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('appDisplayWSSP.urls'))
 ]
+
+if (settings.DEBUG):
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
