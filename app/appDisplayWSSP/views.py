@@ -8,11 +8,8 @@ from utils.storage_backend import SupabaseStorage
 
 # Create your views here.
  
-def get_page_es(request, pagename=None):
-    if pagename == None:
-        webPage = Page.objects.get(url_title_es="inicio")
-    else:
-        webPage = Page.objects.get(url_title_es=pagename)
+def get_page_es(request, pagename='inicio'):
+    webPage = Page.objects.get(url_title_es=pagename)
 
     if webPage:
         # get page sections
@@ -206,11 +203,8 @@ def get_page_es(request, pagename=None):
     else:
         raise Http404
 
-def get_page_en(request, pagename=None):
-    if pagename == None:
-        webPage = Page.objects.get(url_title_en="home")
-    else:
-        webPage = Page.objects.get(url_title_en=pagename)
+def get_page_en(request, pagename='home'):
+    webPage = Page.objects.get(url_title_en=pagename)
 
     if webPage:
         pageSections = webPage.page_sections.all().order_by("display_order")

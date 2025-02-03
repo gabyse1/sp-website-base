@@ -30,10 +30,10 @@
                     <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/logo_sp_oficial.png" alt="">
                 </a>
                 <div id="navbar-lang-icon" class="navbar-lang-icon">
-                    <a class="a-link-mixed lang-es" href="{% url 'get_page_en' 'home' %}">
+                    <a class="a-link-mixed lang-es" href="{% url 'get_page_en' pagename=webPage.url_title_en %}">
                         <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/united-kingdom.png" alt="">EN
                     </a>
-                    <a class="a-link-mixed lang-en" href="{% url 'get_page_es' 'inicio' %}">
+                    <a class="a-link-mixed lang-en" href="{% url 'get_page_es' pagename=webPage.url_title_es %}">
                         <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/spain.png" alt="">ES
                     </a>
                 </div>
