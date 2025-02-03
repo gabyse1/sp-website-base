@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// INICIALIZACIÓN DE VARIABLES GLOBALES PARA TODAS LAS PÁGINAS
 	let paginaWeb = document.querySelector('#body-container').dataset.pageorder;
+	let activeLanguage = document.querySelector("html").getAttribute("lang");
 	let id_seccion = 1;
 	let nroSeccionesPW = $('#body-container').children('section').length;
 	let nroSeccionDestino = 0;
@@ -671,6 +672,38 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
 	function func_aplicarAjustesEnElementos(){
+		/* set language button */
+		if(activeLanguage == "es"){
+			if (document.querySelectorAll(".lang-es")){
+				const es_elements = document.querySelectorAll(".lang-es");
+				es_elements.forEach(function(es_element){
+					es_element.style.display = "inline-flex";
+				});
+			}
+
+			if (document.querySelectorAll(".lang-en")){
+				const en_elements = document.querySelectorAll(".lang-en");
+				en_elements.forEach(function(en_element){
+					en_element.style.display = "none";
+				});
+			}
+		}
+		else{
+			if (document.querySelectorAll(".lang-en")){
+				const en_elements = document.querySelectorAll(".lang-en");
+				en_elements.forEach(function(en_element){
+					en_element.style.display = "inline-flex";
+				});
+			}
+
+			if (document.querySelectorAll(".lang-es")){
+				const es_elements = document.querySelectorAll(".lang-es");
+				es_elements.forEach(function(es_element){
+					es_element.style.display = "none";
+				});
+			}
+		}
+
 		/* Add cero on left side of numbers */
 		let sectionNumbers = document.querySelectorAll(".seccion_titulo_numeracion span");
 		sectionNumbers.forEach(function(sectionNumber){
@@ -1389,4 +1422,14 @@ function func_scopeMap() {
 		});
 		document.querySelector("#information_region").style.display = "none";
 	}
+
+	// SWITCH BETWEEN LANGUAGES
+	var es_lang = document.getElementById("es_lang");
+	es_lang.addEventListener('click', () => {
+		// get the current page in spanish
+		var page_name = window.location.pathname.slice(1);
+		console.log(page_name);
+		// get its corresponding page name in english
+		// switch to english page
+	});
 }
