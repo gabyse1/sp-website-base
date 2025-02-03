@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	let paginaWeb = document.querySelector('#body-container').dataset.pageorder;
 	let id_seccion = 1;
 	let nroSeccionesPW = $('#body-container').children('section').length;
-	let nroSeccionDestino = 0;
 
 	// INICIALIZACION DE VARIABLES PARA USO DEL EVENTO SCROLL
 	let actualPosicionScrollTop = 0;
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function(){
     let videoFullScreen = false;
 
     // INICIALIZACION DE FUNCIONES EN LA PRIMERA CARGA DE PÁGINA WEB
-	func_aplicarAjustesEnElementos();
     func_actualizarNavegadorSecciones(1,1);
     func_inicializarSlidersInteractivosN1();
     func_inicializarSlidersAutomaticosN1();
@@ -50,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	function func_inicializarSlidersInteractivosN1(){
 
 		let nroItemsSIN1 = 0;
-		let numItemsSIN1 = 0;
 
 		for(let i = 1; i <= nroSeccionesPW; i++){
 
@@ -669,205 +666,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	    	$('#seccion_'+id_seccion+' .seccion_fondo_video .video_controles').css('width','100%');
 	    }
     });
-
-	function func_aplicarAjustesEnElementos(){
-		/* Add cero on left side of numbers */
-		let sectionNumbers = document.querySelectorAll(".seccion_titulo_numeracion span");
-		sectionNumbers.forEach(function(sectionNumber){
-			let number = sectionNumber.innerHTML;
-			sectionNumber.innerHTML = padLeft(number, 2);
-		});
-
-		let sectionNavNumbers = document.querySelectorAll(".nav_secciones_numero");
-		sectionNavNumbers.forEach(function(sectionNavNumber){
-			let number = sectionNavNumber.innerHTML;
-			sectionNavNumber.innerHTML = padLeft(number, 2);
-		});
-
-		// inicializar eventos para mostrar el menu de slider
-		let sectionSliderMenus = document.querySelectorAll(".slider-menu-icon");
-		if(sectionSliderMenus){
-			sectionSliderMenus.forEach(function(sectionSliderMenu){
-				sectionSliderMenu.addEventListener("click", function(){
-					let slidermenuid = this.getAttribute("data-slidermenuid");
-					if(!document.querySelector("#checkbox-slider-menu-"+slidermenuid).checked){
-						this.parentElement.style.width = "100%";
-						this.parentElement.style.transition = "width 0s 0s";
-						document.querySelector("#slider-menu-background-"+slidermenuid).classList.add("open-slider-menu-background");
-						document.querySelector("#slider-menu-icon-"+slidermenuid).classList.add("open-slider-menu-icon");
-						document.querySelector("#slider-menu-list-"+slidermenuid).classList.add("open-slider-menu-list");
-					}
-					else{
-						document.querySelector("#slider-menu-background-"+slidermenuid).classList.remove("open-slider-menu-background");
-						document.querySelector("#slider-menu-icon-"+slidermenuid).classList.remove("open-slider-menu-icon");
-						document.querySelector("#slider-menu-list-"+slidermenuid).classList.remove("open-slider-menu-list");
-						this.parentElement.style.width = "5%";
-						this.parentElement.style.transition = "width 0s 2s";
-					}
-				});
-			});
-		}
-
-		// eventos click de slider menu
-		let sliderMenuClickEvents = document.querySelectorAll(".aside-slider-menu .article-link");
-		if(sliderMenuClickEvents){
-			sliderMenuClickEvents.forEach(function(sliderMenuClickEvent){
-				sliderMenuClickEvent.addEventListener("click", function(event){
-					event.preventDefault();
-
-					let indPosObjSliderInteractivoN1 = this.getAttribute("data-slideindex") - 1;
-
-					func_updateActiveItemSliderFromList(indPosActSliderInteractivoN1,indPosObjSliderInteractivoN1);
-
-					if(indPosObjSliderInteractivoN1 > indPosActSliderInteractivoN1){
-
-						if((indPosObjSliderInteractivoN1 - indPosActSliderInteractivoN1) <= (nroItemsSliderInteractivoN1 - indPosObjSliderInteractivoN1 + indPosActSliderInteractivoN1)){
-							func_nextSliderInteractivoN1CX(indPosObjSliderInteractivoN1,indPosObjSliderInteractivoN1 - indPosActSliderInteractivoN1);
-						}
-						else{
-							func_prevSliderInteractivoN1CX(indPosObjSliderInteractivoN1, nroItemsSliderInteractivoN1 - indPosObjSliderInteractivoN1 + indPosActSliderInteractivoN1);
-						}
-					}
-					else{
-						if(indPosObjSliderInteractivoN1 < indPosActSliderInteractivoN1){
-
-							if((indPosActSliderInteractivoN1 - indPosObjSliderInteractivoN1) < (nroItemsSliderInteractivoN1 - indPosActSliderInteractivoN1 + indPosObjSliderInteractivoN1)){
-								func_prevSliderInteractivoN1CX(indPosObjSliderInteractivoN1, indPosActSliderInteractivoN1 - indPosObjSliderInteractivoN1);
-							}
-							else{
-								func_nextSliderInteractivoN1CX(indPosObjSliderInteractivoN1, nroItemsSliderInteractivoN1 - indPosActSliderInteractivoN1 + indPosObjSliderInteractivoN1);
-							}
-						}
-					}
-
-					document.querySelector("#slider-menu-icon-"+this.getAttribute("data-sectionorder")).click();
-
-					// SI EXISTIERA UN SLIDER AUTOMÁTICO DE NIVEL 2
-					func_restSliderAutomaticoN2();
-					func_executeSliderAutomaticoN2();
-				});
-			});
-		}
-
-		// inicializar eventos para reproducción de videos
-		let videoControlsButtons = document.querySelectorAll(".btn_mostrar_video_controles");
-		if(videoControlsButtons){
-			videoControlsButtons.forEach(function(videoControlsButton){
-				videoControlsButton.addEventListener("click",function(){
-					clearTimeout(mouseclickMostrarControles);
-					let videomenuid = videoControlsButton.getAttribute("data-sectionorder");
-					videoControlsButton.style.display = "none";
-					document.querySelector("#video_controles_"+videomenuid).style.display = "flex";
-
-					mouseclickMostrarControles = setTimeout(function() {
-						document.querySelector("#video_controles_"+videomenuid).style.display = "none";
-						videoControlsButton.style.display = "flex";
-					},10000);
-				});
-			});
-		}
-
-		// let videoControls = document.querySelectorAll(".video_controles");
-		// if(videoControls){
-		// 	videoControls.forEach(function(videoControl){
-		// 		let seccionOrden = videoControl.getAttribute("data-sectionorder");
-		// 		videoControl.addEventListener("mouseover",function(){
-		// 			document.querySelector("#video_controles_"+seccionOrden).style.display = "flex";
-		// 		});
-		// 		videoControl.addEventListener("mouseout",function(){
-		// 			document.querySelector("#video_controles_"+seccionOrden).style.display = "none";
-		// 		});
-		// 	});
-		// }
-
-		let playVideoControls = document.querySelectorAll(".video_control_play");
-		if(playVideoControls){
-			playVideoControls.forEach(function(playVideoControl){
-				playVideoControl.addEventListener("click",function(){
-					func_playVideo(playVideoControl.parentElement.getAttribute("data-sectionorder"));
-				});
-			});
-		}
-
-		let pauseVideoControls = document.querySelectorAll(".video_control_pause");
-		if(pauseVideoControls){
-			pauseVideoControls.forEach(function(pauseVideoControl){
-				pauseVideoControl.addEventListener("click",function(){
-					func_pauseVideo(pauseVideoControl.parentElement.getAttribute("data-sectionorder"));
-				});
-			});
-		}
-
-		let mutedVideoControls = document.querySelectorAll(".video_control_muted");
-		if(mutedVideoControls){
-			mutedVideoControls.forEach(function(mutedVideoControl){
-				mutedVideoControl.addEventListener("click",function(){
-					func_mutedVideo(mutedVideoControl.parentElement.getAttribute("data-sectionorder"));
-				});
-			});
-		}
-
-		let soundVideoControls = document.querySelectorAll(".video_control_sound");
-		if(soundVideoControls){
-			soundVideoControls.forEach(function(soundVideoControl){
-				soundVideoControl.addEventListener("click",function(){
-					func_soundVideo(soundVideoControl.parentElement.getAttribute("data-sectionorder"));
-				});
-			});
-		}
-
-		let fullScreenOnVideoControls = document.querySelectorAll(".video_control_fullScreenOn");
-		if(fullScreenOnVideoControls){
-			fullScreenOnVideoControls.forEach(function(fullScreenOnVideoControl){
-				fullScreenOnVideoControl.addEventListener("click",function(){
-					func_fullScreenOnVideo(fullScreenOnVideoControl.parentElement.getAttribute("data-sectionorder"));
-				});
-			});
-		}
-
-		let fullScreenOffVideoControls = document.querySelectorAll(".video_control_fullScreenOff");
-		if(fullScreenOffVideoControls){
-			fullScreenOffVideoControls.forEach(function(fullScreenOffVideoControl){
-				fullScreenOffVideoControl.addEventListener("click",function(){
-					func_fullScreenOffVideo(fullScreenOffVideoControl.parentElement.getAttribute("data-sectionorder"));
-				});
-			});
-		}
-
-		let progressBoxVideoControls = document.querySelectorAll(".video_control_progress .progress_box");
-		if(progressBoxVideoControls){
-			progressBoxVideoControls.forEach(function(progressBoxVideoControl){
-				progressBoxVideoControl.addEventListener("click",function(e){
-					let videoControlProgress = progressBoxVideoControl.parentElement;
-					let sectionid = videoControlProgress.parentElement.getAttribute("data-sectionorder");
-					func_stopProgressTrackVideo();
-					func_pauseVideo(sectionid);
-					func_setPlayProgress(e.pageX,sectionid);
-					func_playVideo(sectionid);
-				});
-			});
-		}
-
-		// eventos click para salto a sección específica
-		let navegadorSecciones = document.querySelectorAll(".nav_secciones_fuente");
-		if(navegadorSecciones){
-			navegadorSecciones.forEach(function(navegadorSeccion){
-				navegadorSeccion.addEventListener("click",function(){
-					nroSeccionDestino = this.getAttribute('id');
-					if(nroSeccionDestino > 0){
-						if(nroSeccionDestino > id_seccion){
-							funcClickFiresScroll(nroSeccionDestino,1);
-						}
-						else{
-							if(nroSeccionDestino < id_seccion){
-								funcClickFiresScroll(nroSeccionDestino,-1);
-							}
-						}
-					}
-				});
-			});
-		}
-	}
 
 	function padLeft(value, length) {
 		return (value.toString().length < length) ? padLeft("0" + value, length) :

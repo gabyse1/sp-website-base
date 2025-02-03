@@ -26,16 +26,23 @@
             <div class="box-margin-left"></div>
             <div class="box-content">
                 <input type="checkbox" id="checkbox-navbar-menu" name="checkbox-navbar-menu">
-                <a class="navbar-brand-icon" href="/inicio" target="_self">
+                {% if webLang == 'es' %}
+                <a class="navbar-brand-icon" href="{% url 'get_page' pagename='inicio' lang='es' %}" target="_self">
+                {% else %}
+                <a class="navbar-brand-icon" href="{% url 'get_page' pagename='home' lang='en' %}" target="_self">
+                {% endif %}
                     <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/logo_sp_oficial.png" alt="">
                 </a>
                 <div id="navbar-lang-icon" class="navbar-lang-icon">
-                    <a class="a-link-mixed lang-es" href="{% url 'get_page_en' pagename=webPage.url_title_en %}">
+                    {% if webLang == 'es' %}
+                    <a class="a-link-mixed" href="{% url 'get_page' pagename=webPage.url_title_en lang='en' %}">
                         <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/united-kingdom.png" alt="">EN
                     </a>
-                    <a class="a-link-mixed lang-en" href="{% url 'get_page_es' pagename=webPage.url_title_es %}">
+                    {% else %}
+                    <a class="a-link-mixed" href="{% url 'get_page' pagename=webPage.url_title_es lang='es' %}">
                         <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/spain.png" alt="">ES
                     </a>
+                    {% endif %}
                 </div>
                 <label id="navbar-menu-icon" class="navbar-menu-icon" type="button" for="checkbox-navbar-menu">
                     <div class="menu-icon">
@@ -53,8 +60,12 @@
                                 <ul class="ul-list ul-vertical-list">
                                     {% if listPages %}
                                     {% for page in listPages %}
-				    <li class="li-item {% if page.id == webPage.id %} active-item {% endif %} lang-es" id="nmid-{{ page.id }}">
-                                        <a class="a-link-textual" href="{% url 'get_page_es' page.url_title_es %}" aria-current="page">{{ page.title_es }}</a>
+				                    <li class="li-item {% if page.id == webPage.id %} active-item {% endif %}" id="nmid-{{ page.id }}">
+                                        {% if webLang == 'es' %}
+                                        <a class="a-link-textual" href="{% url 'get_page' pagename=page.url_title_es lang='es' %}" aria-current="page">{{ page.title_es }}</a>
+                                        {% else %}
+                                        <a class="a-link-textual" href="{% url 'get_page' pagename=page.url_title_en lang='en' %}" aria-current="page">{{ page.title_en }}</a>
+                                        {% endif %}
                                     </li>
                                     {% endfor %}
                                     {% endif %}
@@ -64,15 +75,16 @@
                         <div class="menu-list-rigth menu-list-column">
                             <div class="menu-list-group-border menu-list-language">
                                 <ul class="ul-list ul-horizontal-list">
-                                    <li class="li-item lang-es">
-                                        <a class="a-link-mixed" href="{% url 'get_page_en' 'home' %}">
+                                    <li class="li-item">
+                                        {% if webLang == 'es' %}
+                                        <a class="a-link-mixed" href="{% url 'get_page' pagename=webPage.url_title_en lang='en' %}">
                                             <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/united-kingdom.png" alt="">English
                                         </a>
-                                    </li>
-                                    <li class="li-item lang-en">
-                                        <a class="a-link-mixed" href="{% url 'get_page_es' 'inicio' %}">
+                                        {% else %}
+                                        <a class="a-link-mixed" href="{% url 'get_page' pagename=webPage.url_title_es lang='es' %}">
                                             <img src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/spain.png" alt="">Español
                                         </a>
+                                        {% endif %}
                                     </li>
                                 </ul>
                             </div>
@@ -175,8 +187,11 @@
         <div class="rotateOverlay-container">
             <div class="rotateOverlay-bg"></div>
             <img class="rotateOverlay-icon" src="https://ynikjoicgkkdfoawchcu.supabase.co/storage/v1/object/public/sp-website-base-bucket/images/rotate-icon.png">
-            <p class="rotateOverlay-text lang-es">Rote el dispositivo o reduzca el zoom</p>
-            <p class="rotateOverlay-text lang-en">Rotate your device or reduce zoom</p>
+            {% if webLang == 'es' %}
+            <p class="rotateOverlay-text">Rote el dispositivo o reduzca el zoom</p>
+            {% else %}
+            <p class="rotateOverlay-text">Rotate your device or reduce zoom</p>
+            {% endif %}
         </div>
     </body>
     <script src="{% static 'appDisplayWSSP/js/index.js' %}"></script>
